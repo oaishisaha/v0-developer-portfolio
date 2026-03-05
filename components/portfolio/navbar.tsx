@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, Terminal } from "lucide-react"
+import { Menu, X, Heart } from "lucide-react"
 
 const navLinks = [
+  { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ]
@@ -24,17 +24,17 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"
+          ? "bg-cream/90 backdrop-blur-xl border-b border-pastel-pink shadow-sm"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+      <div className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
         <a
           href="#"
-          className="flex items-center gap-2 text-foreground font-semibold text-lg tracking-tight"
+          className="flex items-center gap-2 text-foreground font-bold text-lg"
         >
-          <Terminal className="h-5 w-5 text-neon" />
-          <span className="font-mono text-sm">portfolio</span>
+          <Heart className="h-5 w-5 text-rose fill-rose" />
+          <span>Oaishi</span>
         </a>
 
         {/* Desktop nav */}
@@ -43,7 +43,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm text-slate-400 hover:text-neon transition-colors duration-200"
+              className="text-sm font-semibold text-muted-foreground hover:text-rose transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -53,7 +53,7 @@ export function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-slate-400 hover:text-foreground transition-colors"
+          className="md:hidden text-muted-foreground hover:text-rose transition-colors"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -62,14 +62,14 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800">
+        <div className="md:hidden bg-cream/95 backdrop-blur-xl border-b border-pastel-pink">
           <div className="px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-sm text-slate-400 hover:text-neon transition-colors duration-200"
+                className="text-sm font-semibold text-muted-foreground hover:text-rose transition-colors duration-200"
               >
                 {link.label}
               </a>

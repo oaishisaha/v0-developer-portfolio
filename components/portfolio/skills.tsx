@@ -1,127 +1,143 @@
-import { Code2, Cpu, BrainCircuit, Database, GitBranch, Layers } from "lucide-react"
+"use client"
 
-const skills = [
-  {
-    title: "Java",
-    description:
-      "Enterprise-grade applications, data structures, algorithms, and OOP design patterns. Experienced with Spring Boot and Maven.",
-    icon: Code2,
-    level: 90,
-    span: "lg:col-span-2 lg:row-span-1",
-  },
-  {
-    title: "Python",
-    description:
-      "Scientific computing, scripting, and ML pipelines. Proficient with NumPy, Pandas, Flask, and FastAPI.",
-    icon: Cpu,
-    level: 95,
-    span: "lg:col-span-1 lg:row-span-2",
-  },
-  {
-    title: "Machine Learning",
-    description:
-      "Neural networks, NLP, computer vision, and reinforcement learning. Hands-on with PyTorch, TensorFlow, and scikit-learn.",
-    icon: BrainCircuit,
-    level: 85,
-    span: "lg:col-span-1 lg:row-span-1",
-  },
-  {
-    title: "Data & Databases",
-    description:
-      "PostgreSQL, MongoDB, data modeling, and ETL pipeline design for scalable systems.",
-    icon: Database,
-    level: 80,
-    span: "lg:col-span-1 lg:row-span-1",
-  },
-  {
-    title: "Version Control & DevOps",
-    description:
-      "Git workflows, CI/CD pipelines, Docker containerization, and cloud deployment with AWS.",
-    icon: GitBranch,
-    level: 85,
-    span: "lg:col-span-1 lg:row-span-1",
-  },
-  {
-    title: "System Design",
-    description:
-      "Distributed systems, microservices architecture, API design, and scalability patterns.",
-    icon: Layers,
-    level: 75,
-    span: "lg:col-span-2 lg:row-span-1",
-  },
+import { useEffect, useRef, useState } from "react"
+import { Code2, BrainCircuit, Terminal, Brain, Lightbulb, Calculator } from "lucide-react"
+
+const technicalSkills = [
+  { name: "Python", level: 95, icon: Code2 },
+  { name: "OOPs (Java)", level: 90, icon: Terminal },
+  { name: "C", level: 85, icon: Code2 },
 ]
+
+const brainPowers = [
+  { label: "Mathematics", icon: Calculator },
+  { label: "Aptitude", icon: Lightbulb },
+  { label: "Logical Reasoning", icon: Brain },
+]
+
+function AnimatedBar({ level, name }: { level: number; name: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref}>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-sm font-bold text-foreground">{name}</span>
+        <span className="text-xs font-bold text-rose">{level}%</span>
+      </div>
+      <div className="h-3 w-full overflow-hidden rounded-full bg-pastel-pink/40">
+        <div
+          className="h-full rounded-full bg-rose transition-all duration-1000 ease-out"
+          style={{
+            width: visible ? `${level}%` : "0%",
+            animation: visible ? `progress-fill 1.2s ease-out` : "none",
+          }}
+          role="progressbar"
+          aria-valuenow={level}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`${name} proficiency: ${level}%`}
+        />
+      </div>
+    </div>
+  )
+}
 
 export function Skills() {
   return (
-    <section id="skills" className="relative py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="skills" className="relative py-20">
+      <div className="mx-auto max-w-5xl px-6">
         {/* Section header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <BrainCircuit className="h-5 w-5 text-neon" />
-            <span className="text-sm font-mono text-neon uppercase tracking-widest">
-              Skills
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Tech Stack
+        <div className="mb-12 text-center">
+          <span className="inline-block rounded-full bg-pastel-pink/40 px-4 py-1 text-xs font-bold text-rose-deep uppercase tracking-widest mb-3">
+            Skills
+          </span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl text-balance">
+            Skills & Strengths
           </h2>
-          <p className="mt-3 max-w-xl text-slate-400 leading-relaxed">
-            The tools and technologies I work with to build intelligent,
-            production-ready software.
-          </p>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {skills.map((skill) => {
-            const Icon = skill.icon
-            return (
-              <div
-                key={skill.title}
-                className={`group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-800/40 p-6 card-hover ${skill.span}`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neon/10 border border-neon/20">
-                    <Icon className="h-5 w-5 text-neon" />
-                  </div>
-                  <span className="font-mono text-xs text-neon">
-                    {skill.level}%
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-semibold text-foreground">
-                  {skill.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate-400 leading-relaxed">
-                  {skill.description}
-                </p>
-
-                {/* Progress bar */}
-                <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-slate-700">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-neon-dark to-neon-light transition-all duration-700"
-                    style={{ width: `${skill.level}%` }}
-                    role="progressbar"
-                    aria-valuenow={skill.level}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label={`${skill.title} proficiency: ${skill.level}%`}
-                  />
-                </div>
-
-                {/* Subtle corner accent */}
-                <div
-                  className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500"
-                  style={{
-                    background:
-                      "radial-gradient(circle, rgba(168,85,247,0.6) 0%, transparent 70%)",
-                  }}
-                  aria-hidden="true"
-                />
+        {/* Bento box */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Technical Stack */}
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6 card-cute md:row-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pastel-pink/40">
+                <BrainCircuit className="h-5 w-5 text-rose" />
               </div>
-            )
-          })}
+              <h3 className="text-lg font-bold text-foreground">Technical Stack</h3>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              {technicalSkills.map((skill) => (
+                <AnimatedBar key={skill.name} level={skill.level} name={skill.name} />
+              ))}
+            </div>
+
+            <div className="mt-6 pt-5 border-t border-pastel-pink/60">
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+                Currently Learning
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Soft Skills", "Communication", "Public Speaking"].map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-full bg-blush border border-pastel-pink/60 px-3 py-1 text-xs font-semibold text-muted-foreground"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Brain Power Bubbles */}
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6 card-cute">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-soft-gold/30">
+                <Brain className="h-5 w-5 text-foreground" />
+              </div>
+              <h3 className="text-lg font-bold text-foreground">Special Brain Power</h3>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {brainPowers.map((bp) => {
+                const Icon = bp.icon
+                return (
+                  <div
+                    key={bp.label}
+                    className="flex items-center gap-3 rounded-2xl bg-pastel-pink/30 border border-pastel-pink px-5 py-4 jiggle bouncy cursor-default"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose/10 border border-rose/30">
+                      <Icon className="h-5 w-5 text-rose" />
+                    </div>
+                    <span className="text-sm font-bold text-foreground">{bp.label}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Extra bento tile: personal touch */}
+          <div className="rounded-3xl border-2 border-soft-gold/60 bg-soft-gold/15 p-6 card-cute flex items-center justify-center text-center">
+            <div>
+              <p className="text-2xl font-extrabold text-foreground">CGPA 9.03</p>
+              <p className="text-sm font-semibold text-muted-foreground mt-1">
+                Consistently in the top of the class
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

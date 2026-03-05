@@ -11,21 +11,9 @@ import {
 } from "lucide-react"
 
 const socialLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com",
-    icon: Github,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: Linkedin,
-  },
-  {
-    label: "Email",
-    href: "mailto:alex@example.com",
-    icon: Mail,
-  },
+  { label: "GitHub", href: "https://github.com", icon: Github },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
+  { label: "Email", href: "mailto:oaishi@example.com", icon: Mail },
 ]
 
 export function Contact() {
@@ -38,86 +26,75 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="contact" className="relative py-20">
+      <div className="mx-auto max-w-5xl px-6">
         {/* Section header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <MessageSquare className="h-5 w-5 text-neon" />
-            <span className="text-sm font-mono text-neon uppercase tracking-widest">
-              Contact
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Get In Touch
+        <div className="mb-12 text-center">
+          <span className="inline-block rounded-full bg-pastel-pink/40 px-4 py-1 text-xs font-bold text-rose-deep uppercase tracking-widest mb-3">
+            Contact
+          </span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl text-balance">
+            Let&apos;s Connect
           </h2>
-          <p className="mt-3 max-w-xl text-slate-400 leading-relaxed">
-            Have a project in mind, or just want to chat? I&apos;d love to hear from you.
+          <p className="mt-3 text-muted-foreground leading-relaxed max-w-lg mx-auto">
+            Have a project in mind, or just want to say hi? I&apos;d love to hear from you.
           </p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Social & info */}
-          <div className="flex flex-col gap-8">
-            <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-4">
-                Connect With Me
-              </h3>
-              <div className="flex flex-col gap-4">
-                {socialLinks.map((link) => {
-                  const Icon = link.icon
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-lg border border-slate-700 bg-slate-900/50 p-4 transition-all hover:border-neon/50 hover:bg-slate-800/80"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-neon/10 border border-neon/20">
-                          <Icon className="h-4 w-4 text-neon" />
-                        </div>
-                        <span className="text-sm font-medium text-slate-300 group-hover:text-foreground transition-colors">
-                          {link.label}
-                        </span>
-                      </div>
-                      <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-neon transition-colors" />
-                    </a>
-                  )
-                })}
-              </div>
-            </div>
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Social links */}
+          <div className="flex flex-col gap-4">
+            {socialLinks.map((link) => {
+              const Icon = link.icon
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-3xl border-2 border-pastel-pink bg-card p-5 card-cute"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pastel-pink/40">
+                      <Icon className="h-5 w-5 text-rose" />
+                    </div>
+                    <span className="text-sm font-bold text-foreground group-hover:text-rose transition-colors">
+                      {link.label}
+                    </span>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-rose transition-colors" />
+                </a>
+              )
+            })}
 
-            {/* Quick note */}
-            <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-6">
-              <p className="text-sm text-slate-400 leading-relaxed">
-                I&apos;m currently open to{" "}
-                <span className="text-neon-light font-medium">
-                  internship opportunities
-                </span>{" "}
-                and{" "}
-                <span className="text-neon-light font-medium">
-                  collaborative research projects
-                </span>{" "}
-                in the AI/ML space. Let&apos;s build something amazing together.
-              </p>
+            {/* Note card */}
+            <div className="rounded-3xl border-2 border-pastel-pink bg-card p-5">
+              <div className="flex items-start gap-3">
+                <MessageSquare className="h-5 w-5 text-rose shrink-0 mt-0.5" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  I&apos;m currently open to{" "}
+                  <span className="text-rose font-bold">collaborative projects</span>{" "}
+                  and{" "}
+                  <span className="text-rose font-bold">research opportunities</span>{" "}
+                  in AI/ML. Let&apos;s build something amazing together.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Email form */}
-          <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-6">
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6">
+            <h3 className="text-lg font-bold text-foreground mb-6">
               Send a Message
             </h3>
 
             {submitted ? (
-              <div className="flex flex-col items-center justify-center py-16 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-neon/10 border border-neon/20 mb-4">
-                  <Send className="h-6 w-6 text-neon" />
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-pastel-pink/40 mb-4">
+                  <Send className="h-6 w-6 text-rose" />
                 </div>
-                <p className="text-foreground font-semibold">Message Sent!</p>
-                <p className="mt-1 text-sm text-slate-400">
+                <p className="text-foreground font-bold">Message Sent!</p>
+                <p className="mt-1 text-sm text-muted-foreground">
                   Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
               </div>
@@ -126,7 +103,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="text-sm font-medium text-slate-300 mb-1.5 block"
+                    className="text-sm font-bold text-foreground mb-1.5 block"
                   >
                     Name
                   </label>
@@ -135,14 +112,14 @@ export function Contact() {
                     id="name"
                     required
                     placeholder="Your name"
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-2.5 text-sm text-foreground placeholder:text-slate-500 focus:border-neon focus:outline-none focus:ring-1 focus:ring-neon transition-colors"
+                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="text-sm font-medium text-slate-300 mb-1.5 block"
+                    className="text-sm font-bold text-foreground mb-1.5 block"
                   >
                     Email
                   </label>
@@ -151,29 +128,29 @@ export function Contact() {
                     id="email"
                     required
                     placeholder="you@example.com"
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-2.5 text-sm text-foreground placeholder:text-slate-500 focus:border-neon focus:outline-none focus:ring-1 focus:ring-neon transition-colors"
+                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="text-sm font-medium text-slate-300 mb-1.5 block"
+                    className="text-sm font-bold text-foreground mb-1.5 block"
                   >
                     Message
                   </label>
                   <textarea
                     id="message"
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="What's on your mind?"
-                    className="w-full resize-none rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-2.5 text-sm text-foreground placeholder:text-slate-500 focus:border-neon focus:outline-none focus:ring-1 focus:ring-neon transition-colors"
+                    className="w-full resize-none rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-neon px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-neon/25 transition-all hover:bg-neon-light hover:shadow-neon/40"
+                  className="bouncy inline-flex items-center justify-center gap-2 rounded-full bg-rose px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-rose/25"
                 >
                   <Send className="h-4 w-4" />
                   Send Message

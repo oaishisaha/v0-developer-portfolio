@@ -1,82 +1,107 @@
 "use client"
 
-import { ArrowDown, Download, ChevronRight } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ArrowDown, Sparkles } from "lucide-react"
+
+const roles = [
+  "2nd Year CSE AI Student @ IEM",
+  "Logical Thinker",
+  "Creative Leader",
+]
 
 export function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [displayed, setDisplayed] = useState("")
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex]
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (!isDeleting && displayed.length < currentRole.length) {
+      timeout = setTimeout(() => {
+        setDisplayed(currentRole.slice(0, displayed.length + 1))
+      }, 60)
+    } else if (!isDeleting && displayed.length === currentRole.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000)
+    } else if (isDeleting && displayed.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayed(currentRole.slice(0, displayed.length - 1))
+      }, 35)
+    } else if (isDeleting && displayed.length === 0) {
+      setIsDeleting(false)
+      setRoleIndex((prev) => (prev + 1) % roles.length)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayed, isDeleting, roleIndex])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Ambient glow */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Soft radial glow */}
       <div
-        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full opacity-20"
+        className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full opacity-30"
         style={{
-          background:
-            "radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0) 70%)",
+          background: "radial-gradient(circle, rgba(255,209,220,0.6) 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Grid pattern */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(168,85,247,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.5) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        {/* Status badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800/50 px-4 py-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-neon" />
-          </span>
-          <span className="text-xs font-medium text-slate-300">
-            Open to opportunities
+      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+        {/* Sparkle chip */}
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-pastel-pink/40 border border-pastel-pink px-4 py-1.5">
+          <Sparkles className="h-4 w-4 text-rose" />
+          <span className="text-xs font-semibold text-rose-deep">
+            Welcome to my world
           </span>
         </div>
 
-        <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance">
-          <span className="text-foreground">Hi, I&apos;m </span>
-          <span className="text-neon text-glow">Alex Chen</span>
+        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance">
+          <span className="text-foreground">{"Hi, I'm "}</span>
+          <span className="text-rose-deep">Oaishi Saha</span>
         </h1>
 
-        <p className="mt-4 text-lg text-slate-400 sm:text-xl lg:text-2xl font-mono">
-          CS Student & AI/ML Enthusiast
-        </p>
+        {/* Typing subtitle */}
+        <div className="mt-5 h-8 flex items-center justify-center">
+          <p className="text-lg font-semibold text-muted-foreground sm:text-xl">
+            {displayed}
+            <span
+              className="ml-0.5 inline-block w-0.5 h-5 bg-rose align-middle"
+              style={{ animation: "typing-blink 0.8s step-end infinite" }}
+            />
+          </p>
+        </div>
 
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 text-pretty">
-          Passionate about building intelligent systems and crafting elegant
-          software. Currently leading a 10-person AI project team and exploring
-          the intersection of machine learning and interactive storytelling.
-        </p>
+        {/* Academic heart badge */}
+        <div className="mt-8 inline-flex items-center gap-4 rounded-3xl bg-soft-gold/30 border-2 border-soft-gold/60 px-6 py-3 heart-glow">
+          <div className="text-center">
+            <p className="text-lg font-extrabold text-foreground">9.03</p>
+            <p className="text-xs font-semibold text-muted-foreground">CGPA (1st Yr)</p>
+          </div>
+          <div className="h-8 w-px bg-soft-gold/60" />
+          <div className="text-center">
+            <p className="text-lg font-extrabold text-foreground">8.83</p>
+            <p className="text-xs font-semibold text-muted-foreground">SGPA (3rd Sem)</p>
+          </div>
+        </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        {/* CTA */}
+        <div className="mt-10">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-neon px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-neon/25 transition-all hover:bg-neon-light hover:shadow-neon/40"
+            className="bouncy inline-flex items-center gap-2 rounded-full bg-rose px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-lg shadow-rose/25"
           >
-            Get in Touch
-            <ChevronRight className="h-4 w-4" />
-          </a>
-          <a
-            href="/resume.pdf"
-            download
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/50 px-6 py-3 text-sm font-semibold text-slate-300 transition-all hover:border-neon/50 hover:text-neon"
-          >
-            <Download className="h-4 w-4" />
-            Download Resume
+            Connect With Me
+            <Sparkles className="h-4 w-4" />
           </a>
         </div>
 
         {/* Scroll indicator */}
-        <div className="mt-20 flex justify-center">
+        <div className="mt-16 flex justify-center">
           <a
-            href="#experience"
-            className="animate-bounce text-slate-400 hover:text-neon transition-colors"
-            aria-label="Scroll to experience section"
+            href="#about"
+            className="animate-bounce text-rose/60 hover:text-rose transition-colors"
+            aria-label="Scroll to about section"
           >
             <ArrowDown className="h-5 w-5" />
           </a>

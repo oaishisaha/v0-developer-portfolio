@@ -1,136 +1,84 @@
-import { Users, Calendar, ExternalLink, Briefcase } from "lucide-react"
-
-const experiences = [
-  {
-    role: "AI Project Team Lead",
-    org: "University AI Research Lab",
-    period: "2024 - Present",
-    description:
-      "Leading a 10-person cross-functional team developing novel AI/ML solutions. Coordinating research sprints, code reviews, and model deployment pipelines. Spearheaded a sentiment analysis project achieving 94% accuracy on benchmark datasets.",
-    highlights: [
-      "Led team of 10 engineers and researchers",
-      "Deployed 3 ML models to production",
-      "Published research on NLP techniques",
-    ],
-    tags: ["Python", "PyTorch", "Transformers", "Docker"],
-  },
-  {
-    role: "Software Engineering Intern",
-    org: "TechCorp Inc.",
-    period: "Summer 2024",
-    description:
-      "Built internal tools and data pipelines for the machine learning infrastructure team. Optimized ETL processes resulting in 40% faster data ingestion. Contributed to the open-source ML monitoring framework.",
-    highlights: [
-      "Optimized data pipelines by 40%",
-      "Contributed to open-source tooling",
-      "Automated CI/CD workflows",
-    ],
-    tags: ["Java", "Python", "AWS", "PostgreSQL"],
-  },
-  {
-    role: "Teaching Assistant",
-    org: "CS Department",
-    period: "2023 - 2024",
-    description:
-      "Assisted in teaching Introduction to Machine Learning and Data Structures courses. Held weekly office hours, graded assignments, and developed supplementary learning materials for 200+ students.",
-    highlights: [
-      "Mentored 200+ students",
-      "Created automated grading scripts",
-      "Designed practice problem sets",
-    ],
-    tags: ["Java", "Python", "Scikit-learn"],
-  },
-]
+import { Star, Users, Trophy, Sparkles } from "lucide-react"
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="experience" className="relative py-20">
+      <div className="mx-auto max-w-5xl px-6">
         {/* Section header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <Briefcase className="h-5 w-5 text-neon" />
-            <span className="text-sm font-mono text-neon uppercase tracking-widest">
-              Experience
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Where I&apos;ve Worked
+        <div className="mb-12 text-center">
+          <span className="inline-block rounded-full bg-pastel-pink/40 px-4 py-1 text-xs font-bold text-rose-deep uppercase tracking-widest mb-3">
+            Experience & Projects
+          </span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl text-balance">
+            Achievements & Leadership
           </h2>
-          <p className="mt-3 max-w-xl text-slate-400 leading-relaxed">
-            From research labs to production systems, here&apos;s my journey building
-            impactful software.
-          </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div
-            className="absolute left-0 top-0 bottom-0 w-px bg-slate-700 hidden md:block md:left-8"
-            aria-hidden="true"
-          />
+        <div className="flex flex-col gap-8">
+          {/* Featured project */}
+          <div className="relative rounded-3xl border-2 border-pastel-pink bg-card p-8 card-cute overflow-hidden">
+            {/* Gold star sticker */}
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full bg-soft-gold/40 border border-soft-gold/70 px-3 py-1">
+              <Star className="h-4 w-4 text-foreground fill-soft-gold" />
+              <span className="text-xs font-bold text-foreground">SUCCESSFULLY COMPLETED</span>
+            </div>
 
-          <div className="flex flex-col gap-12">
-            {experiences.map((exp, idx) => (
-              <div
-                key={idx}
-                className="relative md:pl-20"
-              >
-                {/* Timeline dot */}
-                <div
-                  className="absolute left-6 top-1 hidden h-4 w-4 items-center justify-center rounded-full border-2 border-neon bg-slate-950 md:flex"
-                  aria-hidden="true"
-                >
-                  <div className="h-1.5 w-1.5 rounded-full bg-neon" />
-                </div>
-
-                <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-6 card-hover">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {exp.role}
-                      </h3>
-                      <p className="text-sm text-neon-light flex items-center gap-1.5">
-                        {exp.org}
-                        <ExternalLink className="h-3 w-3" />
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-1 sm:mt-0">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {exp.period}
-                    </div>
-                  </div>
-
-                  <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-                    {exp.description}
-                  </p>
-
-                  <ul className="mt-4 flex flex-col gap-2">
-                    {exp.highlights.map((h, hIdx) => (
-                      <li
-                        key={hIdx}
-                        className="flex items-start gap-2 text-sm text-slate-300"
-                      >
-                        <Users className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neon" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-neon/10 px-2.5 py-1 text-xs font-medium text-neon-light border border-neon/20"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pastel-pink/40 border border-pastel-pink">
+                <Sparkles className="h-6 w-6 text-rose" />
               </div>
-            ))}
+              <div>
+                <h3 className="text-xl font-extrabold text-foreground">
+                  Pet Language Translator
+                </h3>
+                <p className="text-sm font-semibold text-muted-foreground">3rd Semester Project</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              Led a team of 10 members as Team Leader to successful delivery of an NLP-based
+              pet language translation system. The project focused on specialized dataset integration
+              and natural language processing techniques to interpret pet vocalizations and behaviors.
+            </p>
+
+            <div className="flex items-center gap-2 mb-5">
+              <Users className="h-4 w-4 text-rose" />
+              <span className="text-sm font-bold text-foreground">
+                Led a team of 10 members as Team Leader
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {["Python", "NLP", "Team Leadership", "Completed"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-pastel-pink/50 border border-pastel-pink px-3 py-1 text-xs font-bold text-rose-deep"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Hackathon card */}
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-8 card-cute">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-soft-gold/30 border border-soft-gold/60">
+                <Trophy className="h-6 w-6 text-foreground" />
+              </div>
+              <div>
+                <h3 className="text-xl font-extrabold text-foreground">
+                  Hackathon Finalist
+                </h3>
+                <p className="text-sm font-semibold text-muted-foreground">HackSnippet 2025</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Competed among hundreds of teams and reached the finals at HackSnippet 2025,
+              showcasing innovative problem-solving skills and rapid prototyping abilities
+              under time pressure.
+            </p>
           </div>
         </div>
       </div>

@@ -1,21 +1,17 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-inter',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-nunito',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
-  title: 'Developer Portfolio | CS Student & AI/ML Enthusiast',
-  description: 'Personal developer portfolio showcasing projects in AI/ML, interactive storytelling, and software engineering.',
+  title: 'Oaishi Saha | CSE AI Student Portfolio',
+  description: 'Portfolio of Oaishi Saha - 2nd Year CSE AI Student at IEM, creative leader, and aspiring AI engineer.',
   icons: {
     icon: [
       {
@@ -36,7 +32,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0f172a',
+  themeColor: '#FFFAF0',
   width: 'device-width',
   initialScale: 1,
 }
@@ -47,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+    <html lang="en">
+      <body className={`${nunito.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
