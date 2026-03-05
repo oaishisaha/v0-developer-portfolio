@@ -8,12 +8,14 @@ import {
   Linkedin,
   ArrowUpRight,
   MessageSquare,
+  Heart,
+  Sparkles,
 } from "lucide-react"
 
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com", icon: Github },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { label: "Email", href: "mailto:oaishi@example.com", icon: Mail },
+  { label: "GitHub", href: "https://github.com", icon: Github, accent: "bg-pastel-pink/40" },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin, accent: "bg-rose/10" },
+  { label: "Email", href: "mailto:oaishi@example.com", icon: Mail, accent: "bg-soft-gold/30" },
 ]
 
 export function Contact() {
@@ -26,17 +28,32 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-20">
+    <section id="contact" className="relative py-24">
+      {/* Background decorations */}
+      <div
+        className="pointer-events-none absolute top-10 left-10 h-48 w-48 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, #FFD1DC 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-10 right-10 h-40 w-40 rounded-full opacity-15 blur-3xl"
+        style={{ background: "radial-gradient(circle, #FDFD96 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+
       <div className="mx-auto max-w-5xl px-6">
         {/* Section header */}
-        <div className="mb-12 text-center">
-          <span className="inline-block rounded-full bg-pastel-pink/40 px-4 py-1 text-xs font-bold text-rose-deep uppercase tracking-widest mb-3">
+        <div className="mb-14 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-pastel-pink/50 border-2 border-pastel-pink px-5 py-2 text-xs font-extrabold text-rose-deep uppercase tracking-widest mb-4 shadow-sm shadow-rose/10">
+            <Heart className="h-3.5 w-3.5 text-rose fill-rose/50" />
             Contact
+            <Heart className="h-3.5 w-3.5 text-rose fill-rose/50" />
           </span>
           <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl text-balance">
-            Let&apos;s Connect
+            {"Let's "}
+            <span className="text-rose-deep">Connect</span>
           </h2>
-          <p className="mt-3 text-muted-foreground leading-relaxed max-w-lg mx-auto">
+          <p className="mt-4 text-base text-muted-foreground leading-relaxed max-w-lg mx-auto">
             Have a project in mind, or just want to say hi? I&apos;d love to hear from you.
           </p>
         </div>
@@ -52,49 +69,63 @@ export function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-3xl border-2 border-pastel-pink bg-card p-5 card-cute"
+                  className="group flex items-center justify-between rounded-3xl border-2 border-pastel-pink bg-card p-5 card-cute shadow-md shadow-rose/5"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pastel-pink/40">
+                  <div className="flex items-center gap-4">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${link.accent} border-2 border-pastel-pink/60 shadow-sm`}>
                       <Icon className="h-5 w-5 text-rose" />
                     </div>
-                    <span className="text-sm font-bold text-foreground group-hover:text-rose transition-colors">
-                      {link.label}
-                    </span>
+                    <div>
+                      <span className="text-base font-extrabold text-foreground group-hover:text-rose transition-colors block">
+                        {link.label}
+                      </span>
+                      <span className="text-xs font-semibold text-muted-foreground">
+                        {link.label === "Email" ? "Drop me a line" : `View my ${link.label}`}
+                      </span>
+                    </div>
                   </div>
-                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-rose transition-colors" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-pastel-pink/30 group-hover:bg-rose/20 transition-colors">
+                    <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-rose transition-colors" />
+                  </div>
                 </a>
               )
             })}
 
             {/* Note card */}
-            <div className="rounded-3xl border-2 border-pastel-pink bg-card p-5">
-              <div className="flex items-start gap-3">
-                <MessageSquare className="h-5 w-5 text-rose shrink-0 mt-0.5" />
+            <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6 shadow-md shadow-rose/5 relative overflow-hidden">
+              <div className="absolute -top-4 -right-4 h-16 w-16 rounded-full bg-pastel-pink/20 blur-xl" aria-hidden="true" />
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-pastel-pink/40 border border-pastel-pink">
+                  <MessageSquare className="h-5 w-5 text-rose" />
+                </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  I&apos;m currently open to{" "}
-                  <span className="text-rose font-bold">collaborative projects</span>{" "}
-                  and{" "}
-                  <span className="text-rose font-bold">research opportunities</span>{" "}
-                  in AI/ML. Let&apos;s build something amazing together.
+                  {"I'm currently open to "}
+                  <span className="text-rose font-extrabold">collaborative projects</span>
+                  {" and "}
+                  <span className="text-rose font-extrabold">research opportunities</span>
+                  {" in AI/ML. Let's build something amazing together."}
                 </p>
               </div>
             </div>
           </div>
 
           {/* Email form */}
-          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6">
-            <h3 className="text-lg font-bold text-foreground mb-6">
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-8 shadow-lg shadow-rose/5 relative overflow-hidden">
+            <div className="absolute -bottom-6 -right-6 h-24 w-24 rounded-full bg-soft-gold/15 blur-2xl" aria-hidden="true" />
+            <Sparkles className="absolute top-5 right-5 h-5 w-5 text-rose/15" aria-hidden="true" />
+
+            <h3 className="text-xl font-extrabold text-foreground mb-8 flex items-center gap-2">
+              <Send className="h-5 w-5 text-rose" />
               Send a Message
             </h3>
 
             {submitted ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-pastel-pink/40 mb-4">
-                  <Send className="h-6 w-6 text-rose" />
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-pastel-pink/40 border-2 border-pastel-pink mb-5 heart-glow">
+                  <Heart className="h-7 w-7 text-rose fill-rose/30" />
                 </div>
-                <p className="text-foreground font-bold">Message Sent!</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-lg text-foreground font-extrabold">Message Sent!</p>
+                <p className="mt-2 text-sm text-muted-foreground">
                   Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
               </div>
@@ -103,7 +134,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="text-sm font-bold text-foreground mb-1.5 block"
+                    className="text-sm font-extrabold text-foreground mb-2 block"
                   >
                     Name
                   </label>
@@ -112,14 +143,14 @@ export function Contact() {
                     id="name"
                     required
                     placeholder="Your name"
-                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
+                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-5 py-3.5 text-sm font-semibold text-foreground placeholder:text-muted-foreground/50 focus:border-rose focus:outline-none focus:ring-3 focus:ring-rose/15 transition-all shadow-sm"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="text-sm font-bold text-foreground mb-1.5 block"
+                    className="text-sm font-extrabold text-foreground mb-2 block"
                   >
                     Email
                   </label>
@@ -128,14 +159,14 @@ export function Contact() {
                     id="email"
                     required
                     placeholder="you@example.com"
-                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
+                    className="w-full rounded-2xl border-2 border-pastel-pink bg-blush px-5 py-3.5 text-sm font-semibold text-foreground placeholder:text-muted-foreground/50 focus:border-rose focus:outline-none focus:ring-3 focus:ring-rose/15 transition-all shadow-sm"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="text-sm font-bold text-foreground mb-1.5 block"
+                    className="text-sm font-extrabold text-foreground mb-2 block"
                   >
                     Message
                   </label>
@@ -144,16 +175,17 @@ export function Contact() {
                     required
                     rows={4}
                     placeholder="What's on your mind?"
-                    className="w-full resize-none rounded-2xl border-2 border-pastel-pink bg-blush px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20 transition-colors"
+                    className="w-full resize-none rounded-2xl border-2 border-pastel-pink bg-blush px-5 py-3.5 text-sm font-semibold text-foreground placeholder:text-muted-foreground/50 focus:border-rose focus:outline-none focus:ring-3 focus:ring-rose/15 transition-all shadow-sm"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="bouncy inline-flex items-center justify-center gap-2 rounded-full bg-rose px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-rose/25"
+                  className="bouncy inline-flex items-center justify-center gap-3 rounded-full bg-rose px-8 py-4 text-base font-extrabold text-primary-foreground shadow-xl shadow-rose/25 hover:shadow-2xl hover:shadow-rose/35 transition-shadow"
                 >
-                  <Send className="h-4 w-4" />
+                  <Heart className="h-4 w-4 fill-current" />
                   Send Message
+                  <Send className="h-4 w-4" />
                 </button>
               </form>
             )}

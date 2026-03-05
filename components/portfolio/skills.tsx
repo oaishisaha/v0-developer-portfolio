@@ -1,21 +1,21 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Code2, BrainCircuit, Terminal, Brain, Lightbulb, Calculator } from "lucide-react"
+import { Code2, BrainCircuit, Terminal, Brain, Lightbulb, Calculator, Sparkles, Star, Heart } from "lucide-react"
 
 const technicalSkills = [
-  { name: "Python", level: 95, icon: Code2 },
-  { name: "OOPs (Java)", level: 90, icon: Terminal },
-  { name: "C", level: 85, icon: Code2 },
+  { name: "Python", level: 95, icon: Code2, color: "bg-rose" },
+  { name: "OOPs (Java)", level: 90, icon: Terminal, color: "bg-rose-deep" },
+  { name: "C", level: 85, icon: Code2, color: "bg-rose/80" },
 ]
 
 const brainPowers = [
-  { label: "Mathematics", icon: Calculator },
-  { label: "Aptitude", icon: Lightbulb },
-  { label: "Logical Reasoning", icon: Brain },
+  { label: "Mathematics", icon: Calculator, bg: "bg-pastel-pink/40", ring: "border-pastel-pink" },
+  { label: "Aptitude", icon: Lightbulb, bg: "bg-soft-gold/30", ring: "border-soft-gold/60" },
+  { label: "Logical Reasoning", icon: Brain, bg: "bg-rose/10", ring: "border-rose/30" },
 ]
 
-function AnimatedBar({ level, name }: { level: number; name: string }) {
+function AnimatedBar({ level, name, color }: { level: number; name: string; color: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -32,13 +32,13 @@ function AnimatedBar({ level, name }: { level: number; name: string }) {
 
   return (
     <div ref={ref}>
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-sm font-bold text-foreground">{name}</span>
-        <span className="text-xs font-bold text-rose">{level}%</span>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-sm font-extrabold text-foreground">{name}</span>
+        <span className="text-sm font-extrabold text-rose">{level}%</span>
       </div>
-      <div className="h-3 w-full overflow-hidden rounded-full bg-pastel-pink/40">
+      <div className="h-4 w-full overflow-hidden rounded-full bg-pastel-pink/30 border border-pastel-pink/60">
         <div
-          className="h-full rounded-full bg-rose transition-all duration-1000 ease-out"
+          className={`h-full rounded-full ${color} transition-all duration-1000 ease-out relative`}
           style={{
             width: visible ? `${level}%` : "0%",
             animation: visible ? `progress-fill 1.2s ease-out` : "none",
@@ -48,7 +48,10 @@ function AnimatedBar({ level, name }: { level: number; name: string }) {
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label={`${name} proficiency: ${level}%`}
-        />
+        >
+          {/* Shimmer inside bar */}
+          <div className="absolute inset-0 rounded-full opacity-30 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+        </div>
       </div>
     </div>
   )
@@ -56,44 +59,61 @@ function AnimatedBar({ level, name }: { level: number; name: string }) {
 
 export function Skills() {
   return (
-    <section id="skills" className="relative py-20">
+    <section id="skills" className="relative py-24">
+      {/* Background decorations */}
+      <div
+        className="pointer-events-none absolute top-20 right-10 h-52 w-52 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, #FF91A4 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-20 left-10 h-40 w-40 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, #FDFD96 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+
       <div className="mx-auto max-w-5xl px-6">
         {/* Section header */}
-        <div className="mb-12 text-center">
-          <span className="inline-block rounded-full bg-pastel-pink/40 px-4 py-1 text-xs font-bold text-rose-deep uppercase tracking-widest mb-3">
+        <div className="mb-14 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-pastel-pink/50 border-2 border-pastel-pink px-5 py-2 text-xs font-extrabold text-rose-deep uppercase tracking-widest mb-4 shadow-sm shadow-rose/10">
+            <BrainCircuit className="h-3.5 w-3.5 text-rose" />
             Skills
+            <BrainCircuit className="h-3.5 w-3.5 text-rose" />
           </span>
           <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl text-balance">
-            Skills & Strengths
+            Skills & <span className="text-rose-deep">Strengths</span>
           </h2>
         </div>
 
-        {/* Bento box */}
+        {/* Bento box grid */}
         <div className="grid gap-6 md:grid-cols-2">
-          {/* Technical Stack */}
-          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6 card-cute md:row-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pastel-pink/40">
-                <BrainCircuit className="h-5 w-5 text-rose" />
+          {/* Technical Stack - spans 2 rows */}
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-8 card-cute shadow-lg shadow-rose/5 md:row-span-2 relative overflow-hidden">
+            <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-pastel-pink/20 blur-2xl" aria-hidden="true" />
+
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pastel-pink/40 border-2 border-pastel-pink shadow-sm">
+                <BrainCircuit className="h-6 w-6 text-rose" />
               </div>
-              <h3 className="text-lg font-bold text-foreground">Technical Stack</h3>
+              <h3 className="text-xl font-extrabold text-foreground">Technical Stack</h3>
             </div>
 
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-6">
               {technicalSkills.map((skill) => (
-                <AnimatedBar key={skill.name} level={skill.level} name={skill.name} />
+                <AnimatedBar key={skill.name} level={skill.level} name={skill.name} color={skill.color} />
               ))}
             </div>
 
-            <div className="mt-6 pt-5 border-t border-pastel-pink/60">
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+            <div className="mt-8 pt-6 border-t-2 border-pastel-pink/40">
+              <p className="text-xs font-extrabold text-muted-foreground uppercase tracking-widest mb-3 flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 text-rose" />
                 Currently Learning
               </p>
               <div className="flex flex-wrap gap-2">
                 {["Soft Skills", "Communication", "Public Speaking"].map((s) => (
                   <span
                     key={s}
-                    className="rounded-full bg-blush border border-pastel-pink/60 px-3 py-1 text-xs font-semibold text-muted-foreground"
+                    className="rounded-full bg-blush border-2 border-pastel-pink/60 px-4 py-1.5 text-xs font-bold text-muted-foreground bouncy cursor-default"
                   >
                     {s}
                   </span>
@@ -103,12 +123,14 @@ export function Skills() {
           </div>
 
           {/* Brain Power Bubbles */}
-          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-6 card-cute">
+          <div className="rounded-3xl border-2 border-pastel-pink bg-card p-8 card-cute shadow-lg shadow-rose/5 relative overflow-hidden">
+            <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-soft-gold/20 blur-2xl" aria-hidden="true" />
+
             <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-soft-gold/30">
-                <Brain className="h-5 w-5 text-foreground" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-soft-gold/30 border-2 border-soft-gold/60 shadow-sm">
+                <Brain className="h-6 w-6 text-foreground" />
               </div>
-              <h3 className="text-lg font-bold text-foreground">Special Brain Power</h3>
+              <h3 className="text-xl font-extrabold text-foreground">Special Brain Power</h3>
             </div>
 
             <div className="flex flex-col gap-4">
@@ -117,23 +139,31 @@ export function Skills() {
                 return (
                   <div
                     key={bp.label}
-                    className="flex items-center gap-3 rounded-2xl bg-pastel-pink/30 border border-pastel-pink px-5 py-4 jiggle bouncy cursor-default"
+                    className={`flex items-center gap-4 rounded-2xl ${bp.bg} border-2 ${bp.ring} px-5 py-4 jiggle bouncy cursor-default shadow-sm`}
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose/10 border border-rose/30">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card border-2 border-pastel-pink/60 shadow-sm">
                       <Icon className="h-5 w-5 text-rose" />
                     </div>
-                    <span className="text-sm font-bold text-foreground">{bp.label}</span>
+                    <span className="text-sm font-extrabold text-foreground">{bp.label}</span>
                   </div>
                 )
               })}
             </div>
           </div>
 
-          {/* Extra bento tile: personal touch */}
-          <div className="rounded-3xl border-2 border-soft-gold/60 bg-soft-gold/15 p-6 card-cute flex items-center justify-center text-center">
+          {/* CGPA bento tile */}
+          <div className="rounded-3xl border-2 border-soft-gold/60 bg-soft-gold/15 p-8 card-cute flex items-center justify-center text-center shadow-lg shadow-soft-gold/5 relative overflow-hidden">
+            <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-soft-gold/20 blur-2xl" aria-hidden="true" />
+            <Star className="absolute top-4 left-4 h-5 w-5 text-soft-gold/40" aria-hidden="true" />
+            <Heart className="absolute bottom-4 right-4 h-4 w-4 text-rose/20" aria-hidden="true" />
+
             <div>
-              <p className="text-2xl font-extrabold text-foreground">CGPA 9.03</p>
-              <p className="text-sm font-semibold text-muted-foreground mt-1">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Star className="h-6 w-6 text-soft-gold fill-soft-gold/50" />
+                <p className="text-3xl font-extrabold text-foreground">CGPA 9.03</p>
+                <Star className="h-6 w-6 text-soft-gold fill-soft-gold/50" />
+              </div>
+              <p className="text-sm font-bold text-muted-foreground">
                 Consistently in the top of the class
               </p>
             </div>
