@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowDown, Sparkles, Heart, Star } from "lucide-react"
+import { ArrowDown, Sparkles, Heart, Star, Download, Github, Users } from "lucide-react"
 
 const roles = [
   "2nd Year CSE AI Student @ IEM",
@@ -75,7 +75,6 @@ export function Hero() {
           <span className="text-foreground">{"Hi, I'm "}</span>
           <span className="text-rose-deep relative">
             Oaishi Saha
-            {/* Underline decoration */}
             <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none" aria-hidden="true">
               <path d="M2 8 C 40 2, 80 12, 120 6 S 170 2, 198 8" stroke="#FF91A4" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.5" />
             </svg>
@@ -93,40 +92,60 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Academic heart-shaped badge area */}
-        <div className="mt-10 inline-flex items-center gap-5 rounded-full bg-soft-gold/25 border-2 border-soft-gold/60 px-8 py-4 shadow-lg shadow-soft-gold/10 heart-glow">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-soft-gold/40">
-              <Star className="h-5 w-5 text-foreground fill-soft-gold" />
+        {/* Prominent stats: CGPA + Team Lead */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* CGPA Badge - The BIGGEST hero detail */}
+          <div className="flex items-center gap-4 rounded-full bg-soft-gold/25 border-2 border-soft-gold/60 px-8 py-4 shadow-xl shadow-soft-gold/15 heart-glow">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-soft-gold/40 border-2 border-soft-gold/60">
+              <Star className="h-6 w-6 text-foreground fill-soft-gold" />
             </div>
             <div className="text-left">
-              <p className="text-xl font-extrabold text-foreground leading-none">9.03</p>
-              <p className="text-xs font-bold text-muted-foreground">CGPA (1st Yr)</p>
+              <p className="text-3xl font-extrabold text-foreground leading-none">9.03</p>
+              <p className="text-xs font-bold text-muted-foreground">CGPA (1st Year)</p>
             </div>
           </div>
 
-          <div className="h-10 w-px bg-soft-gold/50" />
-
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-soft-gold/40">
-              <Star className="h-5 w-5 text-foreground fill-soft-gold" />
+          {/* Team Lead Badge - The OTHER biggest hero detail */}
+          <div className="flex items-center gap-4 rounded-full bg-pastel-pink/40 border-2 border-pastel-pink px-8 py-4 shadow-xl shadow-rose/15 heart-glow">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/20 border-2 border-rose/40">
+              <Users className="h-6 w-6 text-rose" />
             </div>
             <div className="text-left">
-              <p className="text-xl font-extrabold text-foreground leading-none">8.83</p>
-              <p className="text-xs font-bold text-muted-foreground">SGPA (3rd Sem)</p>
+              <p className="text-3xl font-extrabold text-foreground leading-none">10</p>
+              <p className="text-xs font-bold text-muted-foreground">Person Team Lead</p>
             </div>
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-12">
+        {/* SGPA sub-badge */}
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-blush border-2 border-pastel-pink/50 px-5 py-2 shadow-sm">
+          <Star className="h-3.5 w-3.5 text-soft-gold fill-soft-gold/50" />
+          <span className="text-xs font-bold text-muted-foreground">
+            8.83 SGPA (3rd Semester)
+          </span>
+        </div>
+
+        {/* CTAs: Download Resume + GitHub -- Extra bouncy! */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#contact"
-            className="bouncy inline-flex items-center gap-3 rounded-full bg-rose px-10 py-4 text-base font-extrabold text-primary-foreground shadow-xl shadow-rose/30 hover:shadow-2xl hover:shadow-rose/40 transition-shadow"
+            href="/resume.pdf"
+            download
+            className="extra-bouncy inline-flex items-center gap-3 rounded-full bg-rose px-10 py-4 text-base font-extrabold text-primary-foreground shadow-xl shadow-rose/30 hover:shadow-2xl hover:shadow-rose/40 transition-shadow"
           >
-            <Heart className="h-5 w-5 fill-current" />
-            Connect With Me
-            <Sparkles className="h-5 w-5" />
+            <Download className="h-5 w-5" />
+            Download Resume
+            <Heart className="h-4 w-4 fill-current" />
+          </a>
+
+          <a
+            href="https://github.com/oaishisaha"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="extra-bouncy inline-flex items-center gap-3 rounded-full bg-card border-2 border-pastel-pink px-10 py-4 text-base font-extrabold text-foreground shadow-lg shadow-rose/10 hover:shadow-xl hover:shadow-rose/20 hover:border-rose transition-all"
+          >
+            <Github className="h-5 w-5 text-rose" />
+            GitHub
+            <Sparkles className="h-4 w-4 text-soft-gold" />
           </a>
         </div>
 

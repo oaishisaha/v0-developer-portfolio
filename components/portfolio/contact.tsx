@@ -13,9 +13,9 @@ import {
 } from "lucide-react"
 
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com", icon: Github, accent: "bg-pastel-pink/40" },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin, accent: "bg-rose/10" },
-  { label: "Email", href: "mailto:oaishi@example.com", icon: Mail, accent: "bg-soft-gold/30" },
+  { label: "GitHub", href: "https://github.com/oaishisaha", icon: Github, accent: "bg-pastel-pink/40", sub: "@oaishisaha" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/oaishisaha06", icon: Linkedin, accent: "bg-rose/10", sub: "oaishisaha06" },
+  { label: "Email", href: "mailto:oaishisaha47@gmail.com", icon: Mail, accent: "bg-soft-gold/30", sub: "oaishisaha47@gmail.com" },
 ]
 
 export function Contact() {
@@ -80,7 +80,7 @@ export function Contact() {
                         {link.label}
                       </span>
                       <span className="text-xs font-semibold text-muted-foreground">
-                        {link.label === "Email" ? "Drop me a line" : `View my ${link.label}`}
+                        {link.sub}
                       </span>
                     </div>
                   </div>

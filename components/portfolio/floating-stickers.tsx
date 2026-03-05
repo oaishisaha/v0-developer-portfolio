@@ -35,19 +35,55 @@ const stickerRenderers = [
       <ellipse cx="7.1" cy="16.9" rx="2.5" ry="4" transform="rotate(-45 7.1 16.9)" fill="currentColor" />
     </svg>
   ),
-  // Book
-  (key: number, style: React.CSSProperties) => (
-    <svg key={key} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-rose-deep/25">
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
-  ),
-  // Tiny bow
+  // Bow
   (key: number, style: React.CSSProperties) => (
     <svg key={key} style={style} viewBox="0 0 24 24" fill="currentColor" className="text-rose/35">
       <path d="M12 12C8 8 3 9 3 12s5 4 9 0z" />
       <path d="M12 12c4-4 9-3 9 0s-5 4-9 0z" />
       <circle cx="12" cy="12" r="1.5" fill="#FF91A4" />
+    </svg>
+  ),
+  // Arduino board sticker
+  (key: number, style: React.CSSProperties) => (
+    <svg key={key} style={style} viewBox="0 0 32 32" className="text-rose/35">
+      <rect x="4" y="6" width="24" height="20" rx="3" fill="currentColor" opacity="0.5" />
+      <rect x="6" y="8" width="8" height="6" rx="1" fill="#FF91A4" opacity="0.4" />
+      <circle cx="22" cy="11" r="2.5" fill="#FDFD96" opacity="0.5" />
+      <rect x="7" y="17" width="3" height="2" rx="0.5" fill="#FF91A4" opacity="0.6" />
+      <rect x="12" y="17" width="3" height="2" rx="0.5" fill="#FF91A4" opacity="0.6" />
+      <rect x="17" y="17" width="3" height="2" rx="0.5" fill="#FF91A4" opacity="0.6" />
+      <rect x="22" y="17" width="3" height="2" rx="0.5" fill="#FF91A4" opacity="0.6" />
+      {/* Pin headers top */}
+      <rect x="8" y="4" width="1.5" height="3" rx="0.5" fill="currentColor" opacity="0.7" />
+      <rect x="12" y="4" width="1.5" height="3" rx="0.5" fill="currentColor" opacity="0.7" />
+      <rect x="16" y="4" width="1.5" height="3" rx="0.5" fill="currentColor" opacity="0.7" />
+      <rect x="20" y="4" width="1.5" height="3" rx="0.5" fill="currentColor" opacity="0.7" />
+    </svg>
+  ),
+  // Raspberry Pi sticker
+  (key: number, style: React.CSSProperties) => (
+    <svg key={key} style={style} viewBox="0 0 32 32" className="text-rose-deep/35">
+      <rect x="6" y="8" width="20" height="16" rx="2" fill="currentColor" opacity="0.5" />
+      <rect x="8" y="10" width="6" height="5" rx="1" fill="#FF91A4" opacity="0.4" />
+      <circle cx="21" cy="12" r="2" fill="#FDFD96" opacity="0.5" />
+      <circle cx="21" cy="20" r="2" fill="#FDFD96" opacity="0.4" />
+      {/* GPIO pins */}
+      <rect x="8" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      <rect x="10.5" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      <rect x="13" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      <rect x="15.5" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      <rect x="18" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      <rect x="20.5" y="5" width="1" height="4" rx="0.3" fill="currentColor" opacity="0.7" />
+      {/* Ethernet & USB ports */}
+      <rect x="9" y="18" width="4" height="4" rx="0.5" fill="#FF91A4" opacity="0.3" />
+      <rect x="15" y="18" width="3" height="4" rx="0.5" fill="#FF91A4" opacity="0.3" />
+    </svg>
+  ),
+  // Book
+  (key: number, style: React.CSSProperties) => (
+    <svg key={key} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-rose-deep/25">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
     </svg>
   ),
 ]
@@ -69,7 +105,7 @@ export function FloatingStickers() {
   const [stickers, setStickers] = useState<Sticker[]>([])
 
   useEffect(() => {
-    const items: Sticker[] = Array.from({ length: 20 }, (_, i) => ({
+    const items: Sticker[] = Array.from({ length: 24 }, (_, i) => ({
       id: i,
       type: i % stickerRenderers.length,
       x: Math.random() * 100,

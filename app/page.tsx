@@ -6,6 +6,7 @@ import { Experience } from "@/components/portfolio/experience"
 import { Skills } from "@/components/portfolio/skills"
 import { Contact } from "@/components/portfolio/contact"
 import { Footer } from "@/components/portfolio/footer"
+import { SoundProvider } from "@/components/portfolio/sound-provider"
 import { Heart } from "lucide-react"
 
 function CuteDivider() {
@@ -20,21 +21,23 @@ function CuteDivider() {
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-cream text-foreground overflow-x-hidden">
-      <FloatingStickers />
-      <Navbar />
-      <main className="relative z-10">
-        <Hero />
-        <CuteDivider />
-        <About />
-        <CuteDivider />
-        <Experience />
-        <CuteDivider />
-        <Skills />
-        <CuteDivider />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <SoundProvider>
+      <div className="relative min-h-screen bg-cream text-foreground overflow-x-hidden">
+        <FloatingStickers />
+        <Navbar />
+        <main className="relative z-10">
+          <Hero />
+          <CuteDivider />
+          <About />
+          <CuteDivider />
+          <Experience />
+          <CuteDivider />
+          <Skills />
+          <CuteDivider />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </SoundProvider>
   )
 }
